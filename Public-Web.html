@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Web & Email Checker</title>
+<style>
+body { font-family: system-ui; background:#0f172a; color:#e2e8f0; padding:20px; display:flex; justify-content:center; }
+.container { max-width: 600px; width:100%; }
+input { padding:12px; margin:8px 0; width:100%; border-radius:8px; border:none; background:#1e293b; color:#e2e8f0; box-sizing:border-box; }
+button { padding:12px 20px; margin:8px 0; width:100%; border-radius:8px; border:none; background:#3b82f6; color:white; cursor:pointer; font-weight:600; }
+button:hover { background:#2563eb; }
+.card { background:#1e293b; padding:20px; border-radius:12px; margin:15px 0; }
+h2 { color:#60a5fa; margin:0 0 10px 0; }
+p { color:#94a3b8; font-size:14px; margin:0 0 10px 0; }
+small { color:#94a3b8; }
+.disclaimer { background:#7f1d1d; padding:12px; border-radius:8px; margin-bottom:20px; border-left:4px solid #ef4444; }
+.disclaimer strong { color:#fecaca; }
+.footer { text-align:center; margin-top:30px; padding:15px; border-top:1px solid #334155; color:#64748b; font-size:12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="disclaimer">
+<strong>AVVISO LEGALE - USO ESCLUSIVO PER DATI PUBBLICI</strong><br>
+Questo strumento accede unicamente a servizi pubblici gratuiti. È vietato l'uso per molestie, stalking, doxxing, violazione della privacy o qualsiasi attività illegale. 
+L'autore non è responsabile per usi impropri. Usando questo tool accetti la responsabilità personale.
+</div>
+
+<h1>Web & Email Checker</h1>
+
+<div class="card">
+<h2>1. Scan Sito Web</h2>
+<p>Analizza un sito con urlscan.io per vedere tecnologie, screenshot, domini collegati</p>
+<input id="domain" placeholder="es: google.com" type="text">
+<button onclick="scanSite()">Avvia Scan</button>
+</div>
+
+<div class="card">
+<h2>2. Check Email Data Leak</h2>
+<p>Controlla se l'email è comparsa in data breach pubblici su HaveIBeenPwned</p>
+<input id="email" placeholder="es: esempio@email.com" type="email">
+<button onclick="checkEmail()">Apri HaveIBeenPwned</button>
+<small>HIBP non permette l'apertura diretta. Ti apre il sito con la casella di ricerca pronta.</small>
+</div>
+
+<div class="footer">
+Web & Email Checker v1.0 | Solo dati pubblici | Non affiliato a urlscan.io o HaveIBeenPwned<br>
+Uso illecito = responsabilità dell'utente
+</div>
+
+</div>
+
+<script>
+function scanSite(){
+  let d = document.getElementById('domain').value.trim();
+  if(!d) return alert('Inserisci un dominio');
+  d = d.replace(/^https?:\/\//, '');
+  window.open(`https://urlscan.io/search/#${encodeURIComponent(d)}`, '_blank');
+}
+
+function checkEmail(){
+  let e = document.getElementById('email').value.trim();
+  if(!e) return alert('Inserisci un email');
+  if(!e.includes('@')) return alert('Email non valida');
+  window.open(`https://haveibeenpwned.com/`, '_blank');
+}
+</script>
+</body>
+</html>
